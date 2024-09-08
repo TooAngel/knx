@@ -11,7 +11,8 @@
     "url": "https://github.com/ekarak/knx.git"
   },
   "scripts": {
-    "test": "multi-tape test/*/test-*.js"
+    "test": "multi-tape test/*/test-*.js",
+    "build-types": "tsc index.js --declaration --allowJs --emitDeclarationOnly --outFile types.js"
   },
   "license": "MIT",
   "author": {
@@ -97,6 +98,7 @@
   },
   "devDependencies": {
     "multi-tape": "^1.2.1",
-    "tape": "^4.10.1"
+    "tape": "^4.10.1",
+    "typescript": "5.5.4"
   }
 }

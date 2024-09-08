@@ -350,6 +350,60 @@ const AddTunn = (datagram) => {
 }
 
 // TODO: Conncetion is obviously not a constructor, but tests call it with `new`. That should be deprecated.
+
+/**
+ * @callback connected
+ * @return {void}
+ */
+
+/**
+ * @callback disconnected
+ * @return {void}
+ */
+
+/**
+ * @callback emitEvent
+ * @param {string} evt
+ * @param {string} src
+ * @param {string} dest
+ * @param {Buffer} value
+ * @return {void}
+ */
+
+/**
+ * @callback error
+ * @param {any} connstatus
+ * @return {void}
+ */
+
+/**
+* @typedef {Object} HandlerSpec
+* @property {connected} [connected]
+* @property {disconnected} [disconnected]
+* @property {emitEvent} [event]
+* @property {error} [error]
+**/
+
+/**
+* @typedef {Object} ConnectionSpec
+* @property {string} [ipAddr] - ip address of the KNX router or interface
+* @property {number} [ipPort] - port of the KNX router or interface 
+* @property {string} [interface] - in case you need to specify the multicast interface (say if you have more than one)
+* @property {string} [physAddr] - the KNX physical address we'd like to use
+* @property {string} [loglevel] - set the log level for messsages printed on the console. This can be 'error', 'warn', 'info' (default), 'debug', or 'trace'.
+* @property {boolean} [manualConnect] - do not automatically connect, but use connection.Connect() to establish connection
+* @property {boolean} [forceTunneling] - use tunneling with multicast (router) - this is NOT supported by all routers! See README-resilience.md
+* @property {number} [minimumDelay] - wait at least 10 millisec between each datagram
+* @property {boolean} [suppress_ack_ldatareq] - enable this option to suppress the acknowledge flag with outgoing L_Data.req requests. LoxOne needs this
+* @property {boolean} [localEchoInTunneling] - In tunneling mode, echoes the sent message by emitting a new emitEvent, so other object with same group address, can receive the sent message. Default is false.
+* @property {HandlerSpec[]} [handlers] - event handlers. You can also bind them later with connection.on(event, fn)
+*/
+
+/**
+ * 
+ * @param {ConnectionSpec} options 
+ * @returns 
+ */
 function Connection(options) {
   const conn = new FSM(options);
   // register with the FSM any event handlers passed into the options object
